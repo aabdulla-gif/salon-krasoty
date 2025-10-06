@@ -1,0 +1,65 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class SalonBooking {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] services = {
+                "Мужская стрижка",
+                "Женская стрижка",
+                "Маникюр",
+                "Педикюр",
+                "Покраска волос"
+        };
+
+        ArrayList<String> timeSlots = new ArrayList<>();
+        timeSlots.add("10:00");
+        timeSlots.add("11:00");
+        timeSlots.add("12:00");
+        timeSlots.add("13:00");
+        timeSlots.add("14:00");
+        timeSlots.add("15:00");
+
+        System.out.println("Добро пожаловать в салон красоты!");
+        System.out.println("Выберите процедуру:");
+
+        for (int i = 0; i < services.length; i++) {
+            System.out.println((i + 1) + ". " + services[i]);
+        }
+
+        System.out.print("Введите номер процедуры: ");
+        int serviceChoice = scanner.nextInt();
+
+        if (serviceChoice < 1 || serviceChoice > services.length) {
+            System.out.println("Неверный выбор процедуры!");
+            return;
+        }
+
+        System.out.println("\nВы выбрали: " + services[serviceChoice - 1]);
+        System.out.println("Свободные окошки:");
+
+        for (int i = 0; i < timeSlots.size(); i++) {
+            System.out.println((i + 1) + ". " + timeSlots.get(i));
+        }
+
+        System.out.print("Выберите время: ");
+        int timeChoice = scanner.nextInt();
+
+        if (timeChoice < 1 || timeChoice > timeSlots.size()) {
+            System.out.println("Неверный выбор времени!");
+            return;
+        }
+
+        String chosenTime = timeSlots.get(timeChoice - 1);
+        timeSlots.remove(timeChoice - 1); 
+
+        System.out.println("\nВы записаны на \"" + services[serviceChoice - 1] + "\" в " + chosenTime + ".");
+        System.out.println("Спасибо за запись!");
+
+        System.out.println("\nОставшиеся свободные окошки:");
+        for (String time : timeSlots) {
+            System.out.println(time);
+        }
+    }
+}
